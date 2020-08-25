@@ -9,9 +9,20 @@
     <script>
 
         const choices = ["Rock", "Paper", "Scissors"];
+        const beatingChoices = [3, 1, 2];
 
         function computerPlay() {
             return Math.floor((Math.random() * 3) +1 );
+        }
+
+        function decideGame(playerSelection, computerSelection) {
+            if (beatingChoices[playerSelection -1] == computerSelection) {
+                return "Player";
+            } else if (beatingChoices[computerSelection -1] == playerSelection) {
+                return "Computer";
+            } else {
+                return "No one";
+            }
         }
 
     </script>
