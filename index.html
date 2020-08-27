@@ -25,6 +25,53 @@
             }
         }
 
+        function game(count) {
+            let playerScore = 0;
+            let computerScore = 0;
+
+            for (let i = 0; i < count; i++) {
+                
+                let input = null;
+                let playerChoice = -1;
+
+                while (input == null || playerChoice == -1) {
+                    input = prompt("Make your choice (Rock, Paper or Scissors):");
+                    if (input == null) continue;
+
+                    for (let i = 0; i < choices.length; i++) {
+                        if(choices[i].toUpperCase() === input.toUpperCase()){
+                            playerChoice = i;
+                            break;
+                        }                    
+                    }
+                    
+                }
+                
+                const roundWinner = decideGame(playerChoice, computerPlay());
+
+                switch (roundWinner) {
+                    case "Player":
+                        playerScore++;
+                        break;
+                    case "Computer":
+                        computerScore++;
+                        break;
+                }
+
+                console.log(`${roundWinner} wins round. Player: ${playerScore} | Computer: ${computerScore}`);
+
+            }
+
+            console.log(`Game ends after ${count} rounds.`)
+            console.log(
+                playerScore == computerScore ? "The match is tied."
+                : (playerScore > computerScore ? "Player" : "Computer") + " wins the match!" 
+            );
+
+        }
+
+        game(5);
+
     </script>
 </body>
 </html>
