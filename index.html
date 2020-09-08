@@ -47,8 +47,9 @@
                     
                 }
                 
-                const roundWinner = decideGame(playerChoice, computerPlay());
-
+                const computerChoice = computerPlay();
+                const roundWinner = decideGame(playerChoice, computerChoice);
+                console.log(computerChoice);
                 switch (roundWinner) {
                     case "Player":
                         playerScore++;
@@ -58,7 +59,7 @@
                         break;
                 }
 
-                console.log(`${roundWinner} wins round. Player: ${playerScore} | Computer: ${computerScore}`);
+                console.log(`Computer chose ${choices[computerChoice]} ${roundWinner} wins round. Player: ${playerScore} | Computer: ${computerScore}`);
 
             }
 
