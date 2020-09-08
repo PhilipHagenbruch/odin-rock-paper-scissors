@@ -30,7 +30,7 @@
             let computerScore = 0;
 
             for (let i = 0; i < count; i++) {
-                
+
                 let input = null;
                 let playerChoice = -1;
 
@@ -42,11 +42,11 @@
                         if(choices[i].toUpperCase() === input.toUpperCase()){
                             playerChoice = i;
                             break;
-                        }                    
+                        }
                     }
-                    
+
                 }
-                
+
                 const computerChoice = computerPlay();
                 const roundWinner = decideGame(playerChoice, computerChoice);
                 console.log(computerChoice);
@@ -66,7 +66,7 @@
             console.log(`Game ends after ${count} rounds.`)
             console.log(
                 playerScore == computerScore ? "The match is tied."
-                : (playerScore > computerScore ? "Player" : "Computer") + " wins the match!" 
+                : (playerScore > computerScore ? "Player" : "Computer") + " wins the match!"
             );
 
         }
