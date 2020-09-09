@@ -6,72 +6,53 @@
     <title>Rock Paper Scissors</title>
 </head>
 <body>
+
+    <div id="game-controls">
+        <button class="btn-choice" value="0">Rock</button>
+        <button class="btn-choice" value="1">Paper</button>
+        <button class="btn-choice" value="2">Scissors</button>
+    </div>
+    <div id="game-state">
+        <p>Computer's choice: <span id="state-computer-choice">None, yet</span></p>
+        <p>Outcome: <span id="state-outcome">Nobody</span> wins</p>
+        <p>Points: Player <span id="state-points-player">0</span> | <span id="state-points-computer">0</span> Computer</p>
+    </div>
+
     <script>
-
         const choices = ["Rock", "Paper", "Scissors"];
-        const beatingChoices = [3, 1, 2];
+        const beatingChoices = [2, 0, 1];
 
-        function computerPlay() {
-            return Math.floor((Math.random() * 3));
-        }
+        var playerScore = 0;
+        var computerScore = 0;
 
-        function decideGame(playerSelection, computerSelection) {
-            if (beatingChoices[playerSelection -1] == computerSelection) {
+        document.querySelectorAll(".btn-choice").forEach(element => {
+            element.addEventListener("click", () => {
+                const computerChoice = Math.floor((Math.random() * 3));
+                const roundWinner = decideGame(element['value'], computerChoice);
+                switch (roundWinner) {
+                    case "Player":
+                    playerScore++;
+                    break;
+                    case "Computer":
+                    computerScore++;
+                    break;
+                }
+                document.querySelector("#state-computer-choice").innerHTML = choices[computerChoice];
+                document.querySelector("#state-outcome").innerHTML = roundWinner;
+                document.querySelector("#state-points-player").innerHTML = playerScore;
+                document.querySelector("#state-points-computer").innerHTML = computerScore;
+            });
+        });
+
+        function decideGame(playerChoice, computerChoice) {
+            if (beatingChoices[playerChoice] == computerChoice) {
                 return "Player";
-            } else if (beatingChoices[computerSelection -1] == playerSelection) {
+            } else if (beatingChoices[computerChoice] == playerChoice) {
                 return "Computer";
             } else {
                 return "No one";
             }
         }
-
-        function game(count) {
-            let playerScore = 0;
-            let computerScore = 0;
-
-            for (let i = 0; i < count; i++) {
-
-                let input = null;
-                let playerChoice = -1;
-
-                while (input == null || playerChoice == -1) {
-                    input = prompt("Make your choice (Rock, Paper or Scissors):");
-                    if (input == null) continue;
-
-                    for (let i = 0; i < choices.length; i++) {
-                        if(choices[i].toUpperCase() === input.toUpperCase()){
-                            playerChoice = i;
-                            break;
-                        }
-                    }
-
-                }
-
-                const computerChoice = computerPlay();
-                const roundWinner = decideGame(playerChoice, computerChoice);
-                console.log(computerChoice);
-                switch (roundWinner) {
-                    case "Player":
-                        playerScore++;
-                        break;
-                    case "Computer":
-                        computerScore++;
-                        break;
-                }
-
-                console.log(`Computer chose ${choices[computerChoice]} ${roundWinner} wins round. Player: ${playerScore} | Computer: ${computerScore}`);
-
-            }
-
-            console.log(`Game ends after ${count} rounds.`)
-            console.log(
-                playerScore == computerScore ? "The match is tied."
-                : (playerScore > computerScore ? "Player" : "Computer") + " wins the match!"
-            );
-
-        }
-
-        // game(5);
 
     </script>
 </body>
